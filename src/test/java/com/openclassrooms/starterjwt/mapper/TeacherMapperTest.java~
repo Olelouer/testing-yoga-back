@@ -170,7 +170,8 @@ public class TeacherMapperTest {
         List<TeacherDto> result = teacherMapper.toDto((List<Teacher>) null);
 
         // Assert
-        assertNull(result);
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
     }
 
     @Test
@@ -179,6 +180,7 @@ public class TeacherMapperTest {
         List<Teacher> result = teacherMapper.toEntity((List<TeacherDto>) null);
 
         // Assert
-        assertNull(result);
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
     }
 }

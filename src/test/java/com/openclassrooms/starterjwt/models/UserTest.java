@@ -231,7 +231,5 @@ public class UserTest {
         assertThrows(NullPointerException.class, () -> {
             user.setPassword(null);
         });
-
-        // Note: admin is primitive boolean, so it can't be null
     }
 }
