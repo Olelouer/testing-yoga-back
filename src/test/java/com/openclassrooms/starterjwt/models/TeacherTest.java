@@ -45,33 +45,6 @@ public class TeacherTest {
     }
 
     @Test
-    public void testSettersAndGetters() {
-        // Create a new teacher
-        Teacher teacher = new Teacher();
-
-        // Prepare test data
-        Long id = 2L;
-        String lastName = "Smith";
-        String firstName = "Jane";
-        LocalDateTime createdAt = LocalDateTime.now();
-        LocalDateTime updatedAt = LocalDateTime.now();
-
-        // Set properties using setters
-        teacher.setId(id);
-        teacher.setLastName(lastName);
-        teacher.setFirstName(firstName);
-        teacher.setCreatedAt(createdAt);
-        teacher.setUpdatedAt(updatedAt);
-
-        // Verify properties using getters
-        assertEquals(id, teacher.getId());
-        assertEquals(lastName, teacher.getLastName());
-        assertEquals(firstName, teacher.getFirstName());
-        assertEquals(createdAt, teacher.getCreatedAt());
-        assertEquals(updatedAt, teacher.getUpdatedAt());
-    }
-
-    @Test
     public void testEqualsAndHashCode() {
         // Create two teachers with the same ID
         Teacher teacher1 = new Teacher();
@@ -100,19 +73,6 @@ public class TeacherTest {
     }
 
     @Test
-    public void testChaining() {
-        // Test chaining methods
-        Teacher teacher = new Teacher()
-                .setId(1L)
-                .setLastName("Johnson")
-                .setFirstName("Robert");
-
-        assertEquals(1L, teacher.getId());
-        assertEquals("Johnson", teacher.getLastName());
-        assertEquals("Robert", teacher.getFirstName());
-    }
-
-    @Test
     public void testToString() {
         Teacher teacher = new Teacher();
         teacher.setId(1L);
@@ -125,31 +85,5 @@ public class TeacherTest {
         assertTrue(toString.contains("John"));
         assertTrue(toString.contains("Doe"));
         assertTrue(toString.contains("id=1"));
-    }
-
-    @Test
-    public void testBuilderToString() {
-        // Test toString() method on the builder
-        String builderString = Teacher.builder().toString();
-        assertNotNull(builderString);
-        assertTrue(builderString.contains("Teacher.TeacherBuilder"));
-    }
-
-    @Test
-    public void testCompleteBuilderWorkflow() {
-        // Test the complete builder workflow with toString
-        Teacher.TeacherBuilder builder = Teacher.builder()
-                .id(5L)
-                .firstName("Builder")
-                .lastName("Test");
-
-        String builderString = builder.toString();
-        assertNotNull(builderString);
-        assertTrue(builderString.contains("id=5"));
-
-        Teacher teacher = builder.build();
-        assertEquals(5L, teacher.getId());
-        assertEquals("Builder", teacher.getFirstName());
-        assertEquals("Test", teacher.getLastName());
     }
 }

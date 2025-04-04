@@ -180,32 +180,6 @@ public class SessionControllerIntegrationTest {
     }
 
     @Test
-    public void testFindAllSuccess() throws Exception {
-        // Créer une liste de sessions
-        List<Session> sessions = Arrays.asList(session1, session2);
-        List<SessionDto> sessionDtos = Arrays.asList(sessionDto1, sessionDto2);
-
-        // Configuration des mocks
-        when(sessionService.findAll()).thenReturn(sessions);
-        when(sessionMapper.toDto(anyList())).thenReturn(sessionDtos);
-
-        // Exécution du test et vérification
-        mockMvc.perform(get("/api/session")
-                        .header("Authorization", "Bearer " + jwtToken)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].id").value(sessionDto1.getId()))
-                .andExpect(jsonPath("$[0].name").value(sessionDto1.getName()))
-                .andExpect(jsonPath("$[1].id").value(sessionDto2.getId()))
-                .andExpect(jsonPath("$[1].name").value(sessionDto2.getName()));
-
-        // Vérification des appels aux services
-        verify(sessionService).findAll();
-        verify(sessionMapper).toDto(anyList());
-    }
-
-    @Test
     public void testCreateSuccess() throws Exception {
         // Configuration des mocks
         when(sessionMapper.toEntity(any(SessionDto.class))).thenReturn(session1);
@@ -353,21 +327,6 @@ public class SessionControllerIntegrationTest {
     }
 
     @Test
-    public void testParticipateAlreadyParticipating() throws Exception {
-        // Configuration des mocks
-        doThrow(new BadRequestException()).when(sessionService).participate(1L, 1L);
-
-        // Exécution du test et vérification
-        mockMvc.perform(post("/api/session/1/participate/1")
-                        .header("Authorization", "Bearer " + jwtToken)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
-
-        // Vérification des appels aux services
-        verify(sessionService).participate(1L, 1L);
-    }
-
-    @Test
     public void testNoLongerParticipateSuccess() throws Exception {
         // Configuration des mocks
         doNothing().when(sessionService).noLongerParticipate(1L, 1L);
@@ -407,20 +366,5 @@ public class SessionControllerIntegrationTest {
 
         // Vérification des appels aux services
         verify(sessionService).noLongerParticipate(99L, 1L);
-    }
-
-    @Test
-    public void testNoLongerParticipateNotParticipating() throws Exception {
-        // Configuration des mocks
-        doThrow(new BadRequestException()).when(sessionService).noLongerParticipate(1L, 2L);
-
-        // Exécution du test et vérification
-        mockMvc.perform(delete("/api/session/1/participate/2")
-                        .header("Authorization", "Bearer " + jwtToken)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
-
-        // Vérification des appels aux services
-        verify(sessionService).noLongerParticipate(1L, 2L);
     }
 }

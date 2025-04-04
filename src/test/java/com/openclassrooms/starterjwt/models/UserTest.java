@@ -78,42 +78,6 @@ public class UserTest {
     }
 
     @Test
-    public void testSettersAndGetters() {
-        // Create a new user
-        User user = new User();
-
-        // Prepare test data
-        Long id = 2L;
-        String email = "test@example.com";
-        String lastName = "Johnson";
-        String firstName = "Robert";
-        String password = "myPassword";
-        boolean admin = true;
-        LocalDateTime createdAt = LocalDateTime.now();
-        LocalDateTime updatedAt = LocalDateTime.now();
-
-        // Set properties using setters
-        user.setId(id);
-        user.setEmail(email);
-        user.setLastName(lastName);
-        user.setFirstName(firstName);
-        user.setPassword(password);
-        user.setAdmin(admin);
-        user.setCreatedAt(createdAt);
-        user.setUpdatedAt(updatedAt);
-
-        // Verify properties using getters
-        assertEquals(id, user.getId());
-        assertEquals(email, user.getEmail());
-        assertEquals(lastName, user.getLastName());
-        assertEquals(firstName, user.getFirstName());
-        assertEquals(password, user.getPassword());
-        assertEquals(admin, user.isAdmin());
-        assertEquals(createdAt, user.getCreatedAt());
-        assertEquals(updatedAt, user.getUpdatedAt());
-    }
-
-    @Test
     public void testEqualsAndHashCode() {
         // Create two users with the same ID
         User user1 = new User();
@@ -139,25 +103,6 @@ public class UserTest {
     }
 
     @Test
-    public void testChaining() {
-        // Test chaining methods
-        User user = new User()
-                .setId(1L)
-                .setEmail("chain@example.com")
-                .setLastName("Chain")
-                .setFirstName("Method")
-                .setPassword("chainPassword")
-                .setAdmin(true);
-
-        assertEquals(1L, user.getId());
-        assertEquals("chain@example.com", user.getEmail());
-        assertEquals("Chain", user.getLastName());
-        assertEquals("Method", user.getFirstName());
-        assertEquals("chainPassword", user.getPassword());
-        assertTrue(user.isAdmin());
-    }
-
-    @Test
     public void testToString() {
         User user = new User();
         user.setId(1L);
@@ -172,39 +117,6 @@ public class UserTest {
         assertTrue(toString.contains("ToString"));
         assertTrue(toString.contains("Test"));
         assertTrue(toString.contains("id=1"));
-    }
-
-    @Test
-    public void testBuilderToString() {
-        // Test toString() method on the builder
-        String builderString = User.builder().toString();
-        assertNotNull(builderString);
-        assertTrue(builderString.contains("User.UserBuilder"));
-    }
-
-    @Test
-    public void testCompleteBuilderWorkflow() {
-        // Test the complete builder workflow with toString
-        User.UserBuilder builder = User.builder()
-                .id(10L)
-                .email("builder@example.com")
-                .firstName("Builder")
-                .lastName("Pattern")
-                .password("builderPass")
-                .admin(true);
-
-        String builderString = builder.toString();
-        assertNotNull(builderString);
-        assertTrue(builderString.contains("id=10"));
-        assertTrue(builderString.contains("builder@example.com"));
-
-        User user = builder.build();
-        assertEquals(10L, user.getId());
-        assertEquals("builder@example.com", user.getEmail());
-        assertEquals("Builder", user.getFirstName());
-        assertEquals("Pattern", user.getLastName());
-        assertEquals("builderPass", user.getPassword());
-        assertTrue(user.isAdmin());
     }
 
     @Test

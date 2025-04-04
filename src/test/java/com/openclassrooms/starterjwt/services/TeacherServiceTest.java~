@@ -64,6 +64,20 @@ public class TeacherServiceTest {
     }
 
     @Test
+    public void testFindAllEmptyList() {
+        // Arrange
+        when(teacherRepository.findAll()).thenReturn(Arrays.asList());
+
+        // Act
+        List<Teacher> result = teacherService.findAll();
+
+        // Assert
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+        verify(teacherRepository).findAll();
+    }
+
+    @Test
     public void testFindByIdExisting() {
         // Arrange
         Long teacherId = 1L;

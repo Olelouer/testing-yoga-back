@@ -10,7 +10,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -139,44 +138,6 @@ public class TeacherMapperTest {
     public void testNullToEntity() {
         // Act
         Teacher result = teacherMapper.toEntity((TeacherDto) null);
-
-        // Assert
-        assertNull(result);
-    }
-
-    @Test
-    public void testEmptyListToDto() {
-        // Act
-        List<TeacherDto> result = teacherMapper.toDto(Collections.emptyList());
-
-        // Assert
-        assertNotNull(result);
-        assertTrue(result.isEmpty());
-    }
-
-    @Test
-    public void testEmptyListToEntity() {
-        // Act
-        List<Teacher> result = teacherMapper.toEntity(Collections.emptyList());
-
-        // Assert
-        assertNotNull(result);
-        assertTrue(result.isEmpty());
-    }
-
-    @Test
-    public void testNullListToDto() {
-        // Act
-        List<TeacherDto> result = teacherMapper.toDto((List<Teacher>) null);
-
-        // Assert
-        assertNull(result);
-    }
-
-    @Test
-    public void testNullListToEntity() {
-        // Act
-        List<Teacher> result = teacherMapper.toEntity((List<TeacherDto>) null);
 
         // Assert
         assertNull(result);

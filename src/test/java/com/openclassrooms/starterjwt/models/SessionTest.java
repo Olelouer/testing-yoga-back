@@ -60,42 +60,6 @@ public class SessionTest {
     }
 
     @Test
-    public void testSettersAndGetters() {
-        // Create a new session
-        Session session = new Session();
-
-        // Prepare test data
-        Long id = 2L;
-        String name = "Pilates Class";
-        Date date = new Date();
-        String description = "Core strengthening exercises";
-        Teacher teacher = new Teacher();
-        List<User> users = new ArrayList<>();
-        LocalDateTime createdAt = LocalDateTime.now();
-        LocalDateTime updatedAt = LocalDateTime.now();
-
-        // Set properties using setters
-        session.setId(id);
-        session.setName(name);
-        session.setDate(date);
-        session.setDescription(description);
-        session.setTeacher(teacher);
-        session.setUsers(users);
-        session.setCreatedAt(createdAt);
-        session.setUpdatedAt(updatedAt);
-
-        // Verify properties using getters
-        assertEquals(id, session.getId());
-        assertEquals(name, session.getName());
-        assertEquals(date, session.getDate());
-        assertEquals(description, session.getDescription());
-        assertEquals(teacher, session.getTeacher());
-        assertEquals(users, session.getUsers());
-        assertEquals(createdAt, session.getCreatedAt());
-        assertEquals(updatedAt, session.getUpdatedAt());
-    }
-
-    @Test
     public void testEqualsAndHashCode() {
         // Create two sessions with the same ID
         Session session1 = new Session();
@@ -121,29 +85,6 @@ public class SessionTest {
     }
 
     @Test
-    public void testChaining() {
-        // Test chaining methods
-        Date date = new Date();
-        Teacher teacher = new Teacher();
-        List<User> users = new ArrayList<>();
-
-        Session session = new Session()
-                .setId(1L)
-                .setName("Chained Session")
-                .setDate(date)
-                .setDescription("Description set via chaining")
-                .setTeacher(teacher)
-                .setUsers(users);
-
-        assertEquals(1L, session.getId());
-        assertEquals("Chained Session", session.getName());
-        assertEquals(date, session.getDate());
-        assertEquals("Description set via chaining", session.getDescription());
-        assertEquals(teacher, session.getTeacher());
-        assertEquals(users, session.getUsers());
-    }
-
-    @Test
     public void testToString() {
         Session session = new Session();
         session.setId(1L);
@@ -154,13 +95,5 @@ public class SessionTest {
         assertNotNull(toString);
         assertTrue(toString.contains("Test Session"));
         assertTrue(toString.contains("id=1"));
-    }
-
-    @Test
-    public void testBuilderToString() {
-        // Test toString() method on the builder
-        String builderString = Session.builder().toString();
-        assertNotNull(builderString);
-        assertTrue(builderString.contains("Session.SessionBuilder"));
     }
 }

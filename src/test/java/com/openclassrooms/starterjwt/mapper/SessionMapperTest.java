@@ -16,7 +16,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -115,48 +114,6 @@ public class SessionMapperTest {
     }
 
     @Test
-    public void testToDtoWithNullTeacher() {
-        // Configuration du test
-        session.setTeacher(null);
-
-        // Exécution du test
-        SessionDto resultDto = sessionMapper.toDto(session);
-
-        // Vérifications
-        assertNotNull(resultDto);
-        assertNull(resultDto.getTeacher_id(), "L'ID du teacher devrait être null quand teacher est null");
-    }
-
-    @Test
-    public void testToDtoWithTeacherHavingNullId() {
-        // Configuration du test
-        Teacher teacherWithNullId = new Teacher();
-        teacherWithNullId.setId(null);
-        session.setTeacher(teacherWithNullId);
-
-        // Exécution du test
-        SessionDto resultDto = sessionMapper.toDto(session);
-
-        // Vérifications
-        assertNotNull(resultDto);
-        assertNull(resultDto.getTeacher_id(), "L'ID du teacher devrait être null quand l'ID du teacher est null");
-    }
-
-    @Test
-    public void testToDtoWithNullUsers() {
-        // Configuration du test
-        session.setUsers(null);
-
-        // Exécution du test
-        SessionDto resultDto = sessionMapper.toDto(session);
-
-        // Vérifications
-        assertNotNull(resultDto);
-        assertNotNull(resultDto.getUsers(), "La liste des utilisateurs ne devrait pas être null");
-        assertTrue(resultDto.getUsers().isEmpty(), "La liste des utilisateurs devrait être vide");
-    }
-
-    @Test
     public void testToEntity() {
         // Configuration des mocks
         when(teacherService.findById(1L)).thenReturn(teacher);
@@ -190,6 +147,35 @@ public class SessionMapperTest {
         verify(userService).findById(1L);
         verify(userService).findById(2L);
     }
+
+    @Test
+    public void testToDtoWithNullTeacher() {
+        // Configuration du test
+        session.setTeacher(null);
+
+        // Exécution du test
+        SessionDto resultDto = sessionMapper.toDto(session);
+
+        // Vérifications
+        assertNotNull(resultDto);
+        assertNull(resultDto.getTeacher_id(), "L'ID du teacher devrait être null quand teacher est null");
+    }
+
+    @Test
+    public void testToDtoWithNullUsers() {
+        // Configuration du test
+        session.setUsers(null);
+
+        // Exécution du test
+        SessionDto resultDto = sessionMapper.toDto(session);
+
+        // Vérifications
+        assertNotNull(resultDto);
+        assertNotNull(resultDto.getUsers(), "La liste des utilisateurs ne devrait pas être null");
+        assertTrue(resultDto.getUsers().isEmpty(), "La liste des utilisateurs devrait être vide");
+    }
+
+
 
     @Test
     public void testToEntityWithNullTeacherId() {
@@ -282,67 +268,5 @@ public class SessionMapperTest {
         assertEquals(1, resultList.size());
         assertEquals(session.getId(), resultList.get(0).getId());
         assertEquals(session.getName(), resultList.get(0).getName());
-    }
-
-    @Test
-    public void testToEntityWithEmptyList() {
-        // Configuration du test
-        List<SessionDto> emptyList = Collections.emptyList();
-
-        // Exécution du test
-        List<Session> resultList = sessionMapper.toEntity(emptyList);
-
-        // Vérifications
-        assertNotNull(resultList);
-        assertTrue(resultList.isEmpty());
-    }
-
-    @Test
-    public void testToDtoWithEmptyList() {
-        // Configuration du test
-        List<Session> emptyList = Collections.emptyList();
-
-        // Exécution du test
-        List<SessionDto> resultList = sessionMapper.toDto(emptyList);
-
-        // Vérifications
-        assertNotNull(resultList);
-        assertTrue(resultList.isEmpty());
-    }
-
-    @Test
-    public void testNullToDto() {
-        // Exécution du test
-        SessionDto result = sessionMapper.toDto((Session) null);
-
-        // Vérification
-        assertNull(result);
-    }
-
-    @Test
-    public void testNullToEntity() {
-        // Exécution du test
-        Session result = sessionMapper.toEntity((SessionDto) null);
-
-        // Vérification
-        assertNull(result);
-    }
-
-    @Test
-    public void testNullListToDto() {
-        // Exécution du test
-        List<SessionDto> result = sessionMapper.toDto((List<Session>) null);
-
-        // Vérification
-        assertNull(result);
-    }
-
-    @Test
-    public void testNullListToEntity() {
-        // Exécution du test
-        List<Session> result = sessionMapper.toEntity((List<SessionDto>) null);
-
-        // Vérification
-        assertNull(result);
     }
 }

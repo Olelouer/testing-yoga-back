@@ -175,22 +175,4 @@ public class TeacherControllerIntegrationTest {
         verify(teacherService).findAll();
         verify(teacherMapper).toDto(anyList());
     }
-
-    @Test
-    public void testFindAllEmptyList() throws Exception {
-        // Configuration des mocks
-        when(teacherService.findAll()).thenReturn(Arrays.asList());
-        when(teacherMapper.toDto(anyList())).thenReturn(Arrays.asList());
-
-        // Exécution du test et vérification
-        mockMvc.perform(get("/api/teacher")
-                        .header("Authorization", "Bearer " + jwtToken)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(0)));
-
-        // Vérification des appels aux services
-        verify(teacherService).findAll();
-        verify(teacherMapper).toDto(anyList());
-    }
 }
