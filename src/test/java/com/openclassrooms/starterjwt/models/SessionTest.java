@@ -96,4 +96,35 @@ public class SessionTest {
         assertTrue(toString.contains("Test Session"));
         assertTrue(toString.contains("id=1"));
     }
+
+    @Test
+    public void testSessionBuilderToString() {
+        Date testDate = new Date();
+        Teacher teacher = new Teacher();
+        List<User> users = new ArrayList<>();
+        LocalDateTime now = LocalDateTime.now();
+
+        Session.SessionBuilder builder = Session.builder()
+                .id(1L)
+                .name("Yoga Session")
+                .date(testDate)
+                .description("Beginner friendly yoga class")
+                .teacher(teacher)
+                .users(users)
+                .createdAt(now)
+                .updatedAt(now);
+
+        String builderString = builder.toString();
+
+        // Verify that toString contains all the field values
+        assertTrue(builderString.contains("id=1"));
+        assertTrue(builderString.contains("name=Yoga Session"));
+        assertTrue(builderString.contains("description=Beginner friendly yoga class"));
+        assertTrue(builderString.contains("teacher="));
+        assertTrue(builderString.contains("date="));
+        assertTrue(builderString.contains("users="));
+        assertTrue(builderString.contains("createdAt="));
+        assertTrue(builderString.contains("updatedAt="));
+        assertNotNull(builderString);
+    }
 }

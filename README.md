@@ -28,6 +28,11 @@ Exécutez le script SQL fourni pour initialiser le schéma :
 ```sh
 mysql -u yoga_user -p yoga_app < ressources/sql/script.sql
 ```
+Ou :
+
+```sh
+Get-Content ressources\sql\script.sql | & "PATH_TO_MYSQL\MySQL\MySQL Server 8.0\bin\mysql" -u yoga_user -p yoga_app
+```
 
 ## Configuration de l'application
 
@@ -41,10 +46,6 @@ spring.jpa.hibernate.ddl-auto=update
 ```
 
 ## Installation et démarrage
-
-### Si vous utilisez ce module comme partie du projet principal :
-
-Voir le README principal à la racine du projet pour les instructions de clonage avec sous-modules.
 
 ### Si vous utilisez ce module de façon autonome :
 

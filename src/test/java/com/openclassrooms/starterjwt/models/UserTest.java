@@ -144,4 +144,25 @@ public class UserTest {
             user.setPassword(null);
         });
     }
+
+    @Test
+    public void testUserBuilderToString() {
+        User.UserBuilder builder = User.builder()
+                .id(1L)
+                .email("test@example.com")
+                .lastName("Doe")
+                .firstName("John")
+                .password("password123")
+                .admin(true);
+
+        String builderString = builder.toString();
+
+        // Verify that toString contains all the field values
+        assertTrue(builderString.contains("id=1"));
+        assertTrue(builderString.contains("email=test@example.com"));
+        assertTrue(builderString.contains("lastName=Doe"));
+        assertTrue(builderString.contains("firstName=John"));
+        assertTrue(builderString.contains("password=password123"));
+        assertTrue(builderString.contains("admin=true"));
+    }
 }

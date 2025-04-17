@@ -86,4 +86,24 @@ public class TeacherTest {
         assertTrue(toString.contains("Doe"));
         assertTrue(toString.contains("id=1"));
     }
+
+    @Test
+    public void testTeacherBuilderToString() {
+        Teacher.TeacherBuilder builder = Teacher.builder()
+                .id(1L)
+                .lastName("Doe")
+                .firstName("John")
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now());
+
+        String builderString = builder.toString();
+
+        // Verify that toString contains all the field values
+        assertTrue(builderString.contains("id=1"));
+        assertTrue(builderString.contains("lastName=Doe"));
+        assertTrue(builderString.contains("firstName=John"));
+        assertTrue(builderString.contains("createdAt="));
+        assertTrue(builderString.contains("updatedAt="));
+        assertNotNull(builderString);
+    }
 }
